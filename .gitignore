@@ -1,0 +1,20 @@
+*.o
+*.a
+*~
+
+*/src/gabord
+
+# autotools
+*.swp
+*.m4
+.deps/
+m4/
+autom4te.cache/
+Makefile
+Makefile.in
+config.h
+config.h.in
+config.log
+config.status
+libtool
+stamp-h1
