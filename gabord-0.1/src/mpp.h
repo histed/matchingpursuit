@@ -17,7 +17,8 @@
 #include <strings.h>
 #endif
 #include <math.h>
-#include <malloc.h>
+//#include <malloc.h>
+#include <stdlib.h>
 #ifdef sparc
 #include <alloca.h>
 #endif
@@ -269,6 +270,9 @@ extern double log2();
 
 #endif
 
+#ifndef HAVE_STRNDUP
+char* strndup (const char *s, size_t n);
+#endif
 
 /*-------------------------------------------------------------------------*/
 

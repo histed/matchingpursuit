@@ -1,4 +1,6 @@
 AC_INIT(configure.in)
+AC_CONFIG_MACRO_DIR([m4])
+AC_CHECK_FUNCS(strndup)
 
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE(gabord, 0.1)

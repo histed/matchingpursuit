@@ -15,6 +15,7 @@ static char vcid[] = "$Id: cfg_io.c,v 1.5 2007/05/03 20:58:32 pfranasz Exp $";
 #endif /* lint */
 #define _GNU_SOURCE
 #include "cfg_io.h"
+#include "../mpp.h"  // to get strndup if this is a Mac
 
 const char cfg_ver[]="1.5";
 extern char *progname,*host;

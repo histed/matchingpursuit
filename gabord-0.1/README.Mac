@@ -1,0 +1,10 @@
+2007/07/10 histed
+
+
+export CFLAGS=-m32   # or -m64 for 64bit matlab
+./configure 
+make
+
+cp src/gabord ../source
+
+
