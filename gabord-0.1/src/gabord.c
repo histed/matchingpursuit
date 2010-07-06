@@ -44,7 +44,7 @@ extern int cur_inp;
 
 double *values=(double *)NULL;	//values of signal (temp var.)
 
-SIGNAL signal=(SIGNAL)NULL;  	//signal
+SIGNAL signal0=(SIGNAL)NULL;  	//signal
 SIGNAL sigtmp=(SIGNAL)NULL;		//signal temp for decomp.
 SIGNAL sigtmpi=(SIGNAL)NULL;	//    idem
 
@@ -300,7 +300,7 @@ int main(argc, argv)
 
 ////
 
-	signal = new_signal(sig_size);
+	signal0 = new_signal(sig_size);
 
 	Lnlndata = find2power(lndata);
 	lndata = 1<<Lnlndata;
@@ -336,22 +336,22 @@ int main(argc, argv)
 		for (ichan=0; ichan<nb_chan; ichan++)
 			{
 
-			signal->size_alloca = sig_size;
-			signal->size = lndata;
-			signal->shift = 0;
-			signal->scale = 1;
-			signal->firstp = 0;
-			signal->lastp= signal->size - 1;
-			signal->param = 1;
+			signal0->size_alloca = sig_size;
+			signal0->size = lndata;
+			signal0->shift = 0;
+			signal0->scale = 1;
+			signal0->firstp = 0;
+			signal0->lastp= signal0->size - 1;
+			signal0->param = 1;
 
 			//Read Channel Data
-			nbc=get_double_chan(in+nbinp, signal->values, n, ichan);
+			nbc=get_double_chan(in+nbinp, signal0->values, n, ichan);
 
-  			sig_add_num(signal, -1*sig_mean(signal));		// substract mean to center around zero
+  			sig_add_num(signal0, -1*sig_mean(signal0));		// substract mean to center around zero
 
-			orgN = (double) signal->size;
-			sigN = signal->size;
-			LnSigSize = find2power(signal->size);
+			orgN = (double) signal0->size;
+			sigN = signal0->size;
+			LnSigSize = find2power(signal0->size);
 			cur_MaxOctave = LnSigSize - 1;
 			cur_SOT=1; cur_SOF=1;
 			ShiftOctave = 0;
@@ -370,12 +370,12 @@ int main(argc, argv)
    				values=(double *)malloc(sizeof(double)*sigN);
 		    		if (values  ==(double *)NULL)
 					perror("GDecomp(): mem. alloc. failed!");
-				farray_copy(signal->values,sigN,values);
-				change_signal(signal,SigSize);
+				farray_copy(signal0->values,sigN,values);
+				change_signal(signal0,SigSize);
 				for (i=0;i<sigN;i++)
-		    			signal->values[i] = values[i];
+		    			signal0->values[i] = values[i];
 				for (i=SigSize;i<sigN;i++)
-	    				signal->values[i] = 0.0;
+	    				signal0->values[i] = 0.0;
 				free((char *)values);
 				sigN = SigSize;
 				}
@@ -418,7 +418,7 @@ int main(argc, argv)
 				change_signal(sigtmp,SigSize<<1);
 
 		    	for (i=0;i<SigSize;i++)
-				sigtmp->values[i] = signal->values[i];
+				sigtmp->values[i] = signal0->values[i];
 				
 		    	cur_transform = GaborDecomp(cur_transform,sigtmp,cur_filter,
 					SubsampleOctaveTime,SubsampleOctaveFreq,
@@ -432,7 +432,7 @@ int main(argc, argv)
 			    cur_SOT = SubsampleOctaveTime;
 			    cur_SOF = SubsampleOctaveFreq;
 			    cur_sig_size = SigSize;
-			    cur_signal = signal;
+			    cur_signal = signal0;
 
 /*--------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------*/
